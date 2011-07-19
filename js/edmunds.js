@@ -1,12 +1,12 @@
 (function() {
 	
 	// Setup variables
-	var keys = [/(Acura) (MDX|RDX|RL|TL|TSX|TSX Sports|ZDX)/ig, /(Aston Martin) (DB9|DBS|Virage|Vantage)/ig, /(Audi) (A3|A4|A5|A6|A7|A8|Q3|Q5|Q7|R8|RS|S4|S5|S7|S8|TT|TT3)/ig];
-	keys = keys.concat([/(Bentley) (Azure|Brooklands|Continental Flying Spur|Continental GT|Continental Supersports|Mulsanne)/ig, /(BMW) (1 series|3 series|5 series|6 series|7 series|ActiveHybrid|ALPINA|M3|M5|M6|X1|X3|X5|X6|Z4)/ig, /(Bugatti) (Veyron)/ig, /(Buick) (Enclave|LaCrosse|Lucerne|Regal|Verano)/ig, /(Cadillac) (CTS|DTS|Escalade|SRX|STS|XTS|)/ig, /(Chevrolet) (Avalanche|Aveo|Camaro|Colorado|Corvette|Cruze|Equinox|Express|HHR|Malibu|Silverado|Sonic|Suburban|Tahoe|Volt)/ig, /(Chrysler) (200|300|Town and Country)/ig, /(Dodge) (Avenger|Caliber|Challenger|Charger|Dakota|Durango|Grand Caravan|Journey|Nitro|Ram|Viper)/ig]);
-	keys = keys.concat([/(Ferrari) (458|599|612|California|FF)/ig, /(Fiat) (500)/ig, /(Ford) (E-Series|Edge|Escape|Expedition|Explorer|F-150|F-250|F-350|F-450|Fiesta|Flex|Focus|Fusion|Mustang|Ranger|Shelby|Taurus|Transit)/ig, /(GMC) (Acadia|Canyon|Savana|Sierra|Terrain|Yukon)/ig, /(Honda) (Accord|Civic|CR-V|Element|Fit|Insight|Pilot|Ridgeline)/ig, /(Hyundai) (Accent|Azera|Elantra|Equus|Genesis|HED-5|Santa Fe|Sonata|Tucson|Veloster|Veracruz)/ig, /(Infiniti) (EX|FX|G|JX|M|M37|M56|QX56)/ig, /(Jaguar) (XE|XF|XJ|XK)/ig, /(Jeep) (Compass|Gran Cherokee|Liberty|Patriot|Wrangler)/ig, /(Kia) (Cadenza|Forte|Optima|Rio|Sedona|Sorento|Soul|Sportage)/ig]);
-	keys = keys.concat([/(Lamborghini) (Aventador|Gallardo|Murcielago)/ig, /(Land Rover) (LR2|LR4|Range Rover)/ig, /(Lexus) (CT 200h|ES 350|GS 350|GS 450h|GX 460|HS 250h|IS 250|IS 350|IS F|LFA|LS 460|LS 600h|LX 570|RX 350|RX 400h|RX 450h)/ig, /(Lincoln) (MKS|MKT|MKX|MKZ|Nanigator|Town Car)/ig, /(Lotus) (Elise|Evora|Exige)/ig, /(Maserati) (GrandTurismo|Quattroporte)/ig, /(Maybach) (57|62|Landaulet)/ig, /(Mazda) (CX-7|CX-9|MAZDA2|MAZDA3|MAZDA5|MAZDA6|MAZDASPEED3|MX-5|Miata|RX-8|Tribute)/ig, /(McLaren) (MP4-12c)/ig]);
-	keys = keys.concat([/(Mercedes-Benz) (C63|CLS63|E-Class|G-Class|GL-Class|GLK-Class|M-Class|R-Class|S-Class|SL-Class|SLS)/ig, /(Mercury) (Grand Marquis|Mariner|Milan|Mountaineer)/ig, /(MINI) (John Cooper|Clubman|Countryman|Roadster|Cooper)/ig, /(Mitsubishi) (Eclipse|Endeavor|Galant|i-MEV|Lancer|Outlander)/ig, /(Nissan) (370Z|Altima|Armada|Cube|Frontier|GT-R|Juke|Leaf|Maxima|Murano|NV|Pathfinder|Rogue|Sentra|Titan|Versa|XTerra)/ig, /(Porche) (911|GT2|GT3|Boxter|Cayenne|Cayman|Panamera)/ig, /(Rolls-Royce) (Ghost|Phantom)/ig, /(Saab) (9-3|9-4X|905)/ig, /(Scion) (FR-S|iQ|tC|xB|xD)/ig]);
-	keys = keys.concat([/(smart) (fortwo)/ig, /(Spyker) (C8)/ig, /(Subaru) (Forester|Impreza|Legacy|Outback|Tribeca)/ig, /(Suzuki) (Equator|Grand Vitara|Kizashi|SX4)/ig, /(Tesla) (Roadster)/ig, /(Toyota) (4Runner|Avalon|Corolla|Camry|FJ|Highlander|Land Cruiser|Matrix|Prius|Rav4|Sequoia|Sienna|Tacoma|Tundra|Venza|Yaris)/ig, /(VolksWagen) (Beetle|CC|Eos|GLI|Golf|GTI|Jetta|Passat|Polo|Routan|Tiguan|Touareg)/ig, /(Volvo) (C30|C70|S40|S60|S80|V50|XC60|XC70|XC90)/ig]);
+	var keys = [/(Acura) (MDX|RDX|RL|TL|TSX|TSX Sports|ZDX)/g, /(Aston Martin) (DB9|DBS|Virage|Vantage)/g, /(Audi) (A3|A4|A5|A6|A7|A8|Q3|Q5|Q7|R8|RS|S4|S5|S7|S8|TT|TT3)/g];
+	keys = keys.concat([/(Bentley) (Azure|Brooklands|Continental Flying Spur|Continental GT|Continental Supersports|Mulsanne)/g, /(BMW) (1 series|3 series|5 series|6 series|7 series|ActiveHybrid|ALPINA|M3|M5|M6|X1|X3|X5|X6|Z4)/g, /(Bugatti) (Veyron)/g, /(Buick) (Enclave|LaCrosse|Lucerne|Regal|Verano)/g, /(Cadillac) (CTS|DTS|Escalade|SRX|STS|XTS|)/g, /(Chevrolet) (Avalanche|Aveo|Camaro|Colorado|Corvette|Cruze|Equinox|Express|HHR|Malibu|Silverado|Sonic|Suburban|Tahoe|Volt)/g, /(Chrysler) (200|300|Town and Country)/g, /(Dodge) (Avenger|Caliber|Challenger|Charger|Dakota|Durango|Grand Caravan|Journey|Nitro|Ram|Viper)/g]);
+	keys = keys.concat([/(Ferrari) (458|599|612|California|FF)/g, /(Fiat) (500)/g, /(Ford) (E-Series|Edge|Escape|Expedition|Explorer|F-150|F-250|F-350|F-450|Fiesta|Flex|Focus|Fusion|Mustang|Ranger|Shelby|Taurus|Transit)/g, /(GMC) (Acadia|Canyon|Savana|Sierra|Terrain|Yukon)/g, /(Honda) (Accord|Civic|CR-V|Element|Fit|Insight|Pilot|Ridgeline)/g, /(Hyundai) (Accent|Azera|Elantra|Equus|Genesis|HED-5|Santa Fe|Sonata|Tucson|Veloster|Veracruz)/g, /(Infiniti) (EX|FX|G|JX|M|M37|M56|QX56)/g, /(Jaguar) (XE|XF|XJ|XK)/g, /(Jeep) (Compass|Gran Cherokee|Liberty|Patriot|Wrangler)/g, /(Kia) (Cadenza|Forte|Optima|Rio|Sedona|Sorento|Soul|Sportage)/g]);
+	keys = keys.concat([/(Lamborghini) (Aventador|Gallardo|Murcielago)/g, /(Land Rover) (LR2|LR4|Range Rover)/g, /(Lexus) (CT 200h|ES 350|GS 350|GS 450h|GX 460|HS 250h|IS 250|IS 350|IS F|LFA|LS 460|LS 600h|LX 570|RX 350|RX 400h|RX 450h)/g, /(Lincoln) (MKS|MKT|MKX|MKZ|Nanigator|Town Car)/g, /(Lotus) (Elise|Evora|Exige)/g, /(Maserati) (GrandTurismo|Quattroporte)/g, /(Maybach) (57|62|Landaulet)/g, /(Mazda) (CX-7|CX-9|MAZDA2|MAZDA3|MAZDA5|MAZDA6|MAZDASPEED3|MX-5|Miata|RX-8|Tribute)/g, /(McLaren) (MP4-12c)/g]);
+	keys = keys.concat([/(Mercedes-Benz) (C63|CLS63|E-Class|G-Class|GL-Class|GLK-Class|M-Class|R-Class|S-Class|SL-Class|SLS)/g, /(Mercury) (Grand Marquis|Mariner|Milan|Mountaineer)/g, /(MINI) (John Cooper|Clubman|Countryman|Roadster|Cooper)/g, /(Mitsubishi) (Eclipse|Endeavor|Galant|i-MEV|Lancer|Outlander)/g, /(Nissan) (370Z|Altima|Armada|Cube|Frontier|GT-R|Juke|Leaf|Maxima|Murano|NV|Pathfinder|Rogue|Sentra|Titan|Versa|XTerra)/g, /(Porche) (911|GT2|GT3|Boxter|Cayenne|Cayman|Panamera)/g, /(Rolls-Royce) (Ghost|Phantom)/g, /(Saab) (9-3|9-4X|905)/g, /(Scion) (FR-S|iQ|tC|xB|xD)/g]);
+	keys = keys.concat([/(smart) (fortwo)/g, /(Spyker) (C8)/g, /(Subaru) (Forester|Impreza|Legacy|Outback|Tribeca)/g, /(Suzuki) (Equator|Grand Vitara|Kizashi|SX4)/g, /(Tesla) (Roadster)/g, /(Toyota) (4Runner|Avalon|Corolla|Camry|FJ|Highlander|Land Cruiser|Matrix|Prius|Rav4|Sequoia|Sienna|Tacoma|Tundra|Venza|Yaris)/g, /(VolksWagen) (Beetle|CC|Eos|GLI|Golf|GTI|Jetta|Passat|Polo|Routan|Tiguan|Touareg)/g, /(Volvo) (C30|C70|S40|S60|S80|V50|XC60|XC70|XC90)/g]);
 	var cars = [];
 	var displayedCars = {};
 	
@@ -37,6 +37,9 @@
 		a.target = "_blank";
 		var img = document.createElement('img');
 		img.src = car.path;
+		img.onclick = function() {
+			chrome.extension.sendRequest({'action' : 'trackEvent', 'action': 'Image'+id, 'label': 'Click', 'value': car.makeName+" " + car.modelName + " " + car.year});
+		};
 		var dv = document.createElement('div');
 		var tmvCur = car.price.tmv.toString().replace(/(-?[0-9]+)([0-9]{3})/, "$1,$2");
 		dv.innerHTML = "<h2>"+car.makeName+" " + car.modelName + " " + car.year + "</h2>TMV&trade;: <strong>$" + tmvCur + "</strong>";
@@ -67,6 +70,7 @@
 			edmundsComToolbar.appendChild(edmundsComToolbarHandleParent);
 			document.body.appendChild(edmundsComToolbar);
 			edmundsComToolbarHandle.addEventListener ("click", function(e) {
+				chrome.extension.sendRequest({'action' : 'trackEvent', 'action': 'Tray', 'label': 'Toggle', 'value': 'The tray is toggled'});
 				$('#edmundsComToolbarContent').slideToggle('slow', function() {
 				});
 			}, false);
@@ -101,6 +105,7 @@
 				}
 			}
 			getCarData();
+			chrome.extension.sendRequest({'action' : 'trackView'});
 		}
 	}
 })();
