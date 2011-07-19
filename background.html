@@ -28,7 +28,6 @@
 				var arr = car.split(" ");
 				var year = new Date().getFullYear();
 				var url = "http://api.edmunds.com/v1/api/vehicle/" + arr[0] + "/" + arr[1] + "/"+year+"?api_key=g2dgxhfatcspkunbb7m33zv6&fmt=json";
-				console.log(url);
 				xhr.open('GET', url, true);
 			    xhr.send();
 		      };
@@ -88,10 +87,33 @@
 				if (request.action == 'fetchEdmundsPhotoFeed') {
 		          fetchEdmundsPhotoFeed(callback, request.data);
 		        }
+				if (request.action == 'trackEvent') {
+					trackEvent(request);
+				}
+				if (request.action == 'trackView') {
+					trackView();
+				}
 		      };
+		
+			function trackView() {
+				_gaq.push(['_trackPageview']);
+			}
+			
+			function trackEvent(obj) {
+				_gaq.push(['_trackEvent', obj.action, obj.label, obj.value]);
+			}
 
 		      // Wire up the listener.
 		      chrome.extension.onRequest.addListener(onRequest);
+		
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-24624649-1']);
+            
+			(function() {
+			  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			  ga.src = 'https://ssl.google-analytics.com/ga.js';
+			  var s = document.getElementsByTagName('head')[0]; s.appendChild(ga);
+			})();
 		</script>
     </body>
 </html>
