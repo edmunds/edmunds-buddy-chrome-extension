@@ -1,0 +1,17 @@
+{
+	"name": "Edmunds Buddy (beta)",
+	"version": "1.0",
+	"description": "Learn about cars wherever you are!",
+	"background_page": "background.html",
+	"icons": { "16": "css/images/16.png",
+	           "48": "css/images/48.png",
+	          "128": "css/images/128.png" },
+	"content_scripts": [{
+		"matches": ["http://*/*"],
+		"js": ["js/jquery-1.5.2.min.js", "js/edmunds.js"],
+		"css": ["css/main.css"],
+		"all_frames": false,
+		"run_at": "document_idle"
+	}],
+	"permissions":["http://api.edmunds.com/"]
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+		<script>
+		      /**
+		       * Performs an XMLHttpRequest to Twitter's API to get trending topics.
+		       * @param callback Function If the response from fetching url has a
+		       *     HTTP status of 200, this function is called with a JSON decoded
+		       *     response.  Otherwise, this function is called with null.
+		       */
+		      function fetchEdmundsFeed(callback, car) {
+		        var xhr = new XMLHttpRequest();
+		        xhr.onreadystatechange = function(data) {
+		          if (xhr.readyState == 4) {
+		            if (xhr.status == 200) {
+		              var data = JSON.parse(xhr.responseText);
+		              callback(data);
+		            } else {
+		              callback(null);
+		            }
+		          }
+		        }
+		        // Note that any URL fetched here must be matched by a permission in
+		        // the manifest.json file!
+				// Get data
+				var arr = car.split(" ");
+				var year = new Date().getFullYear();
+				var url = "http://api.edmunds.com/v1/api/vehicle/" + arr[0] + "/" + arr[1] + "/"+year+"?api_key=g2dgxhfatcspkunbb7m33zv6&fmt=json";
+				console.log(url);
+				xhr.open('GET', url, true);
+			    xhr.send();
+		      };
+		
+			 function fetchEdmundsStyleFeed(callback, ur) {
+		        var xhr = new XMLHttpRequest();
+		        xhr.onreadystatechange = function(data) {
+		          if (xhr.readyState == 4) {
+		            if (xhr.status == 200) {
+		              var data = JSON.parse(xhr.responseText);
+		              callback(data);
+		            } else {
+		              callback(null);
+		            }
+		          }
+		        }
+		        // Note that any URL fetched here must be matched by a permission in
+		        // the manifest.json file!
+				// Get data
+				var url = "http://api.edmunds.com/v1" + ur + "?api_key=g2dgxhfatcspkunbb7m33zv6&fmt=json";
+				xhr.open('GET', url, true);
+			    xhr.send();
+		      };
+		
+			function fetchEdmundsPhotoFeed(callback, url) {
+		        var xhr = new XMLHttpRequest();
+		        xhr.onreadystatechange = function(data) {
+		          if (xhr.readyState == 4) {
+		            if (xhr.status == 200) {
+		              var data = JSON.parse(xhr.responseText);
+		              callback(data);
+		            } else {
+		              callback(null);
+		            }
+		          }
+		        }
+		        // Note that any URL fetched here must be matched by a permission in
+		        // the manifest.json file!
+				// Get data
+				xhr.open('GET', url, true);
+			    xhr.send();
+		      };
+
+		      /**
+		       * Handles data sent via chrome.extension.sendRequest().
+		       * @param request Object Data sent in the request.
+		       * @param sender Object Origin of the request.
+		       * @param callback Function The method to call when the request completes.
+		       */
+		      function onRequest(request, sender, callback) {
+		        if (request.action == 'fetchEdmundsFeed') {
+		          fetchEdmundsFeed(callback, request.data);
+		        }
+				if (request.action == 'fetchEdmundsStyleFeed') {
+		          fetchEdmundsStyleFeed(callback, request.data);
+		        }
+				if (request.action == 'fetchEdmundsPhotoFeed') {
+		          fetchEdmundsPhotoFeed(callback, request.data);
+		        }
+		      };
+
+		      // Wire up the listener.
+		      chrome.extension.onRequest.addListener(onRequest);
+		</script>
+    </body>
+</html>
