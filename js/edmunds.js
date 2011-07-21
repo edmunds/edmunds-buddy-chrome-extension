@@ -9,6 +9,7 @@
 	keys = keys.concat([/(smart) (fortwo)/g, /(Spyker) (C8)/g, /(Subaru) (Forester|Impreza|Legacy|Outback|Tribeca)/g, /(Suzuki) (Equator|Grand Vitara|Kizashi|SX4)/g, /(Tesla) (Roadster)/g, /(Toyota) (4Runner|Avalon|Corolla|Camry|FJ|Highlander|Land Cruiser|Matrix|Prius|Rav4|Sequoia|Sienna|Tacoma|Tundra|Venza|Yaris)/g, /(VolksWagen) (Beetle|CC|Eos|GLI|Golf|GTI|Jetta|Passat|Polo|Routan|Tiguan|Touareg)/g, /(Volvo) (C30|C70|S40|S60|S80|V50|XC60|XC70|XC90)/g]);
 	var cars = [];
 	var displayedCars = {};
+	var data_exists = false;
 	
 	// Find cars on the page
 	function findCars() {
@@ -53,43 +54,49 @@
 	}
 	
 	// Implementation logic
-	if (window.location.href.indexOf('www.edmunds.com') === -1) {
+	if (window.location.href.indexOf('edmunds.com') === -1) {
 		findCars();
-		if(cars[0]) {
-			var edmundsComToolbar = document.createElement('div');
-			edmundsComToolbar.id = "edmundsComToolbar";
-			var edmundsComToolbarContent = document.createElement('div');
-			edmundsComToolbarContent.id = "edmundsComToolbarContent";
-			edmundsComToolbarContent.className = "content";
-			var edmundsComToolbarHandleParent = document.createElement('div');
-			edmundsComToolbarHandleParent.className = "handle";
-			var edmundsComToolbarHandle = document.createElement('span');
-			edmundsComToolbarHandle.id = "edmundsComToolbarHandle";
-			edmundsComToolbarHandleParent.appendChild(edmundsComToolbarHandle);
-			edmundsComToolbar.appendChild(edmundsComToolbarContent);
-			edmundsComToolbar.appendChild(edmundsComToolbarHandleParent);
-			document.body.appendChild(edmundsComToolbar);
-			edmundsComToolbarHandle.addEventListener ("click", function(e) {
-				chrome.extension.sendRequest({'action' : 'trackEvent', 'action': 'Tray', 'label': 'Toggle', 'value': 'The tray is toggled'});
-				$('#edmundsComToolbarContent').slideToggle('slow', function() {
-				});
-			}, false);
-			
-			
+		if(cars[0]) {		
+						
 			function onData(data) {
-				displayedCars[data.modelYearHolder[0].styles[0].id] = displayedCars[data.modelYearHolder[0].styles[0].id] || {};
-				displayedCars[data.modelYearHolder[0].styles[0].id].id = data.modelYearHolder[0].styles[0].id;
-				displayedCars[data.modelYearHolder[0].styles[0].id].makeName = data.modelYearHolder[0].makeName;
-				displayedCars[data.modelYearHolder[0].styles[0].id].modelName = data.modelYearHolder[0].modelName;
-				displayedCars[data.modelYearHolder[0].styles[0].id].makeNiceName = data.modelYearHolder[0].makeNiceName;
-				displayedCars[data.modelYearHolder[0].styles[0].id].modelNiceName = data.modelYearHolder[0].modelNiceName;
-				displayedCars[data.modelYearHolder[0].styles[0].id].year = data.modelYearHolder[0].year;
-				chrome.extension.sendRequest({'action' : 'fetchEdmundsStyleFeed', 'data': data.modelYearHolder[0].styles[0].link}, onStyle);
+				if (data && data.modelYearHolder.length > 0) {
+					displayedCars[data.modelYearHolder[0].styles[0].id] = displayedCars[data.modelYearHolder[0].styles[0].id] || {};
+					displayedCars[data.modelYearHolder[0].styles[0].id].id = data.modelYearHolder[0].styles[0].id;
+					displayedCars[data.modelYearHolder[0].styles[0].id].makeName = data.modelYearHolder[0].makeName;
+					displayedCars[data.modelYearHolder[0].styles[0].id].modelName = data.modelYearHolder[0].modelName;
+					displayedCars[data.modelYearHolder[0].styles[0].id].makeNiceName = data.modelYearHolder[0].makeNiceName;
+					displayedCars[data.modelYearHolder[0].styles[0].id].modelNiceName = data.modelYearHolder[0].modelNiceName;
+					displayedCars[data.modelYearHolder[0].styles[0].id].year = data.modelYearHolder[0].year;
+					chrome.extension.sendRequest({'action' : 'fetchEdmundsStyleFeed', 'data': data.modelYearHolder[0].styles[0].link}, onStyle);
+				}
 			}
 			
 			function onStyle(data) {
-				displayedCars[data.styleHolder[0].id].price = data.styleHolder[0].price;
-				chrome.extension.sendRequest({'action' : 'fetchEdmundsPhotoFeed', 'data': "http://api.edmunds.com/v1/api/vehicle-directory-ajax/styles/getstylephotoprice?styleid="+data.styleHolder[0].id+"&bitmaptype=T&api_key=g2dgxhfatcspkunbb7m33zv6"}, onPhoto);
+				if (data && data.styleHolder.length > 0) {
+					displayedCars[data.styleHolder[0].id].price = data.styleHolder[0].price;
+					chrome.extension.sendRequest({'action' : 'fetchEdmundsPhotoFeed', 'data': "http://api.edmunds.com/v1/api/vehicle-directory-ajax/styles/getstylephotoprice?styleid="+data.styleHolder[0].id+"&bitmaptype=T&api_key=g2dgxhfatcspkunbb7m33zv6"}, onPhoto);
+					if (!data_exists) {
+						var edmundsComToolbar = document.createElement('div');
+						edmundsComToolbar.id = "edmundsComToolbar";
+						var edmundsComToolbarContent = document.createElement('div');
+						edmundsComToolbarContent.id = "edmundsComToolbarContent";
+						edmundsComToolbarContent.className = "content";
+						var edmundsComToolbarHandleParent = document.createElement('div');
+						edmundsComToolbarHandleParent.className = "handle";
+						var edmundsComToolbarHandle = document.createElement('span');
+						edmundsComToolbarHandle.id = "edmundsComToolbarHandle";
+						edmundsComToolbarHandleParent.appendChild(edmundsComToolbarHandle);
+						edmundsComToolbar.appendChild(edmundsComToolbarContent);
+						edmundsComToolbar.appendChild(edmundsComToolbarHandleParent);
+						document.body.appendChild(edmundsComToolbar);
+						edmundsComToolbarHandle.addEventListener ("click", function(e) {
+							chrome.extension.sendRequest({'action' : 'trackEvent', 'action': 'Tray', 'label': 'Toggle', 'value': 'The tray is toggled'});
+							$('#edmundsComToolbarContent').slideToggle('slow', function() {
+							});
+						}, false);
+						data_exists = true;
+					}
+				}
 			}
 			
 			function onPhoto(data) {
